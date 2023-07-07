@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trang đăng nhập</title>
+  <style>
+    .container {
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      background-color: #f4f4f4;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .error-message {
+      color: red;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Đăng nhập</h2>
+    <form id="login-form">
+      <input type="email" id="email1" placeholder="Email" required>
+      <input type="password" id="password1" placeholder="Mật khẩu" required>
+      <button type="submit">Đăng nhập</button>
+    </form>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    document.getElementById("login-form").addEventListener("submit", function(event) {
+      event.preventDefault(); // Ngăn chặn form submit tự động
+
+      // Lấy giá trị từ input email và password
+      var email = document.getElementById("email1").value;
+      var password = document.getElementById("password1").value;
+
+      // Kiểm tra xem email và password có được nhập vào không
+      if (!email) {
+        // Hiển thị thông báo lỗi "required" cho email
+        document.getElementById("message1").innerHTML = "<p class='error-message'>Vui lòng nhập địa chỉ email.</p>";
+      } else if (!password) {
+        // Hiển thị thông báo lỗi "required" cho password
+        document.getElementById("message2").innerHTML = "<p class='error-message'>Vui lòng nhập mật khẩu.</p>";
+      } else if (!validateEmail(email)) {
+        // Hiển thị thông báo lỗi cho địa chỉ email không đúng định dạng
+        document.getElementById("message1").innerHTML = "<p class='error-message'>Địa chỉ email không đúng định dạng.</p>";
+      } else {
+        // Kiểm tra thông tin đăng nhập
+        if (email === "pronam47@gmail.com" && password === "nam123") {
+          // Đăng nhập thành công, chuyển hướng đến trang thành công
+          window.location.href = "/trangchu.html";
+        } else {
+          // Hiển thị thông báo lỗi
+          document.getElementById("message").innerHTML = "<p class='error-message'>Thông tin đăng nhập không chính xác. Vui lòng thử lại.</p>";
+        }
+      }
+    });
+
+    // Hàm kiểm tra định dạng địa chỉ email
+    function validateEmail(email) {
+      var re = /\S+@\S+\.\S+/;
+      return re.test(email);
+    }
+  </script>
+</body>
+</html>
